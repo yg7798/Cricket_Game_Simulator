@@ -1,12 +1,8 @@
-package com.example.gamecricket.entities;
+package com.example.gamecricket.utility;
 
-import com.example.gamecricket.utility.MatchUtil;
-import com.example.gamecricket.utility.Results;
-import com.example.gamecricket.utility.TeamUtil;
+import com.example.gamecricket.entities.*;
 
-import java.util.Date;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Match extends Thread {
     private static int team1;
@@ -33,25 +29,31 @@ public class Match extends Thread {
         Scanner sc = new Scanner(System.in);
         String venue = sc.next();
         int overs = sc.nextInt();  // Ex -10,20,50
-        Over over=new Over(overs);
-        over.setOverNo(overs);
         get_teams();
         Team teams1 = TeamUtil.createTeam1(team1);
         Team teams2 = TeamUtil.createTeam2(team2);
         MatchUtil matchUtil = new MatchUtil(venue, overs, teams1, teams2, null, null);
-        if (Toss.startToss()) {
+        ArrayList<Wicket>wicketsInfo=new ArrayList<>();
+        if (Toss.startToss()=="Head") {
+            Innings innings1=new Innings();  innings1.setBattingTeam(teams1);  innings1.setBowlingTeam(teams2);
             matchUtil.setFirst(teams1);
-            MatchPlay.play(over,teams1, Integer.MAX_VALUE, false);
+            MatchPlay.play(overs,teams1, Integer.MAX_VALUE, false,teams2,wicketsInfo,innings1);
+            ScoreBoard.printScoreBoard(innings1);
+            Innings innings2=new Innings();  innings2.setBattingTeam(teams2);  innings2.setBowlingTeam(teams1);
             matchUtil.setSecond(teams2);
-            MatchPlay.play( over,teams2, teams1.getTotalRuns(), true);
+            MatchPlay.play( overs,teams2, teams1.getTotalRuns(), true,teams1,wicketsInfo,innings2);
+            ScoreBoard.printScoreBoard(innings2);
             System.out.println(Results.getResult(matchUtil,teams1,teams2));
         } else {
+            Innings innings1=new Innings();  innings1.setBattingTeam(teams2);  innings1.setBowlingTeam(teams1);
             matchUtil.setFirst(teams2);
-            MatchPlay.play( over,teams2, Integer.MAX_VALUE, false);
+            MatchPlay.play( overs,teams2, Integer.MAX_VALUE, false,teams1,wicketsInfo,innings1);
+            ScoreBoard.printScoreBoard(innings1);
+            Innings innings2=new Innings();  innings2.setBattingTeam(teams1);  innings2.setBowlingTeam(teams2);
             matchUtil.setSecond(teams1);
-            MatchPlay.play( over,teams1, teams2.getTotalRuns(), true);
+            MatchPlay.play( overs,teams1, teams2.getTotalRuns(), true,teams2,wicketsInfo,innings2);
+            ScoreBoard.printScoreBoard(innings2);
             System.out.println(Results.getResult(matchUtil,teams2,teams1));
         }
-
     }
 }

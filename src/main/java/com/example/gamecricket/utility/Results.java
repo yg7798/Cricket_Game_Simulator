@@ -1,9 +1,14 @@
 package com.example.gamecricket.utility;
 
 import com.example.gamecricket.entities.Innings;
+import com.example.gamecricket.entities.MatchUtil;
 import com.example.gamecricket.entities.Team;
+import com.example.gamecricket.entities.Wicket;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 public class Results {
     public static String getResult(MatchUtil match, Team first, Team second) {
@@ -11,7 +16,6 @@ public class Results {
         //System.out.println("Hello everyone "+match.getNoOfOvers()+" over match is scheduled between team "+first.getTeamNo()+" and "+second.getTeamNo()+" at "+match.getVenue()+" on "+new Date().toString());
         int firstInningScore;
         int secondInningScore;
-
         firstInningScore=first.getTotalRuns();
         System.out.println("sore of first inning is "+firstInningScore);
         firstInningScore=firstInningScore+1;
