@@ -5,8 +5,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class MatchUtil {
+public class Match {
     private String venue;
     private int noOfOvers;
-    Team team1,team2,first,second;
+    Team team1,team2;
+    private String dateAndTime;
+    Innings innings1,innings2;
 }

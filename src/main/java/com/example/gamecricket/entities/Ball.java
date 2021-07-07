@@ -5,13 +5,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-import java.util.Random;
-
 @Data
-@Getter
 @Setter
-public class Over{
-    List<Ball>ballInfo;
-    private Player bowler;
+@Getter
+@AllArgsConstructor
+public class Ball {
+  Player striker,nonStriker;
+  private int overNo;
+  RunOrWicket runOrWicket;
 }

@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-@Setter
-@Getter
+@AllArgsConstructor
 public class Wicket {
   private int wicketTakeBy; // bowler player_id
   private int whoGotOut;    //batsman player_id

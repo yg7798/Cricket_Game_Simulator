@@ -1,6 +1,6 @@
 package com.example.gamecricket.utility;
 
-public class GetRunsOrWickets {
+public class RandomGeneratorUtil {
     private static int findCeil(int[] arr, int r, int l, int h){
         int mid;
         while (l < h)
