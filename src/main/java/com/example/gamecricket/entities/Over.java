@@ -9,9 +9,8 @@ import java.util.List;
 import java.util.Random;
 
 @Data
-@Getter
-@Setter
 public class Over{
-    List<Ball>ballInfo;
+    private List<Ball>ballInfo;
     private Player bowler;
+    private int overNo;
 }

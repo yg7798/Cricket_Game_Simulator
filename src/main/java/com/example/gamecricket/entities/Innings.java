@@ -1,20 +1,26 @@
 package com.example.gamecricket.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Getter
-@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "`innings`")
 public class Innings {
-    Team battingTeam,bowlingTeam;
-    List<Wicket>wickets;
-    List<Over>overs;
-    private int runsToBeat;
+
+    //private Team battingTeam,bowlingTeam;
+   // private List<Wicket>wickets;
+   // private List<Over>overs;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int inningsID;
+    private int inningsNo;
+    private int matchNo;
+    private int battingTeamId;
+    private int bowlingTeamId;
     private int totalRuns;
     private int dotBalls;
     private int sixes;

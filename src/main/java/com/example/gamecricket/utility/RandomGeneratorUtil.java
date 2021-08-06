@@ -16,7 +16,22 @@ public class RandomGeneratorUtil {
         return (arr[l] >= r) ? l : -1;
     }
 
-    public static int myRandom(){
+    public static int indexUpperBound1(){
+        int[] arr    = {0,1,2,3,4,5,6,7};
+        int[] freq   = {20,15,5,2,2,1,1,54};
+        int n = 8;
+        int[] prefix = new int[n];
+        int i;
+        prefix[0] = freq[0];
+        for (i = 1; i < n; ++i)
+        {
+            prefix[i]  = prefix[i - 1] + freq[i];
+        }
+        int r = (int) (Math.random() * 100) + 1;
+        int indexc = findCeil(prefix, r, 0, 7);
+        return arr[indexc] - 1;
+    }
+    public static int indexUpperBound2(){
         int[] arr    = {0,1,2,3,4,5,6,7};
         int[] freq   = {8,30,20,18,15,4,2,3};
         int n = 8;
@@ -31,4 +46,5 @@ public class RandomGeneratorUtil {
         int indexc = findCeil(prefix, r, 0, 7);
         return arr[indexc] - 1;
     }
+
 }

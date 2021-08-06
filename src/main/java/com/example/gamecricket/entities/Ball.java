@@ -1,16 +1,29 @@
 package com.example.gamecricket.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.persistence.*;
 
 @Data
-@Setter
-@Getter
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "`ball`")
 public class Ball {
-  Player striker,nonStriker;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int ballID;
+  private int ballNo;
+  private int strikerId;
+  private int nonStrikerId;
+  private int bowlerId;
+
+  //private Player striker,nonStriker;
   private int overNo;
-  RunOrWicket runOrWicket;
+  @Enumerated(EnumType.STRING)
+  private RunOrWicket runOrWicket;
+
+  private int matchNo;
+  private  int inningsNo;
 }
