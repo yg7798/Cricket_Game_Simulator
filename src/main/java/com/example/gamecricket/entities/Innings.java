@@ -1,5 +1,6 @@
 package com.example.gamecricket.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,11 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "`innings`")
-public class Innings {
-
-    //private Team battingTeam,bowlingTeam;
-   // private List<Wicket>wickets;
-   // private List<Over>overs;
+public class Innings extends Base {
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int inningsID;

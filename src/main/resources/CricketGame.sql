@@ -28,14 +28,17 @@ CREATE TABLE `ball` (
                         `strikerId` int DEFAULT NULL,
                         `nonStrikerId` int DEFAULT NULL,
                         `bowlerId` int DEFAULT NULL,
+                        `runsScored` int DEFAULT NULL,
+                        `isWicketFall` tinyint DEFAULT NULL,
                         `overNo` int DEFAULT NULL,
-                        `runOrWicket` varchar(45) DEFAULT NULL,
                         `matchNo` int DEFAULT NULL,
                         `inningsNo` int DEFAULT NULL,
+                        `createdTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5),
+                        `modifiedTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5) ON UPDATE CURRENT_TIMESTAMP(5),
                         PRIMARY KEY (`ballID`),
                         KEY `matchNo_idx` (`matchNo`),
                         CONSTRAINT `matchNo` FOREIGN KEY (`matchNo`) REFERENCES `match` (`matchID`)
-) ENGINE=InnoDB AUTO_INCREMENT=228 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=630 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -58,10 +61,12 @@ CREATE TABLE `innings` (
                            `wicketsDown` int DEFAULT NULL,
                            `ballsPlayed` int DEFAULT NULL,
                            `isChasing` tinyint DEFAULT NULL,
+                           `createdTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5),
+                           `modifiedTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5) ON UPDATE CURRENT_TIMESTAMP(5),
                            PRIMARY KEY (`inningsID`),
                            KEY `idmatch_idx` (`matchNo`),
                            CONSTRAINT `matchID` FOREIGN KEY (`matchNo`) REFERENCES `match` (`matchID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,11 +80,12 @@ CREATE TABLE `match` (
                          `matchID` int NOT NULL AUTO_INCREMENT,
                          `venue` varchar(45) DEFAULT NULL,
                          `overs` int DEFAULT NULL,
-                         `dateAndTime` varchar(45) DEFAULT NULL,
                          `teamId1` int DEFAULT NULL,
                          `teamId2` int DEFAULT NULL,
+                         `createdTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5),
+                         `modifiedTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5) ON UPDATE CURRENT_TIMESTAMP(5),
                          PRIMARY KEY (`matchID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,8 +109,10 @@ CREATE TABLE `player` (
                           `strikeRate` double DEFAULT NULL,
                           `average` double DEFAULT NULL,
                           `economy` double DEFAULT NULL,
+                          `createdTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5),
+                          `modifiedTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5) ON UPDATE CURRENT_TIMESTAMP(5),
                           PRIMARY KEY (`playerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,8 +125,10 @@ DROP TABLE IF EXISTS `team`;
 CREATE TABLE `team` (
                         `teamID` int NOT NULL AUTO_INCREMENT,
                         `teamName` varchar(45) DEFAULT NULL,
+                        `createdTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5),
+                        `modifiedTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5) ON UPDATE CURRENT_TIMESTAMP(5),
                         PRIMARY KEY (`teamID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,11 +141,30 @@ DROP TABLE IF EXISTS `team_player_map`;
 CREATE TABLE `team_player_map` (
                                    `teamID` int NOT NULL,
                                    `playerID` int NOT NULL,
+                                   `createdTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5),
+                                   `modifiedTime` timestamp(5) NOT NULL DEFAULT CURRENT_TIMESTAMP(5) ON UPDATE CURRENT_TIMESTAMP(5),
                                    PRIMARY KEY (`teamID`,`playerID`),
                                    KEY `playerID_idx` (`playerID`),
                                    CONSTRAINT `playerID` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`),
                                    CONSTRAINT `teamID` FOREIGN KEY (`teamID`) REFERENCES `team` (`teamID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tossResult`
+--
+
+DROP TABLE IF EXISTS `tossResult`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tossResult` (
+                              `tossID` int NOT NULL AUTO_INCREMENT,
+                              `matchID` int NOT NULL,
+                              `battingTeamID` int DEFAULT NULL,
+                              `bowlingTeamID` int DEFAULT NULL,
+                              `result` varchar(45) DEFAULT NULL,
+                              PRIMARY KEY (`tossID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -147,4 +176,4 @@ CREATE TABLE `team_player_map` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-06 17:46:00
+-- Dump completed on 2021-08-13 16:58:11

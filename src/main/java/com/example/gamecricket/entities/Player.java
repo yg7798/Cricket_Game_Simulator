@@ -1,16 +1,19 @@
 package com.example.gamecricket.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "`player`")
-public class Player {
-   // private int playerTeam;  // team for which he play
+public class Player extends Base{
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int playerID;
@@ -39,14 +42,5 @@ public class Player {
     private double average;
     @Column
     private double economy;
-    /*public Player(int playerId, Role role, int i5, int i11, int i21, int i, int i1, int i2, int i3, double v1, double v, double i4)
-    {
-       // this.playerTeam=playerTeam;
-        this.playerId=playerId;
-        this.role=role;
-    }*/
 
- public Player() {
-
- }
 }

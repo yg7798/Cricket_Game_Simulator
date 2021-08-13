@@ -1,11 +1,11 @@
 package com.example.gamecricket.repository;
 
 import com.example.gamecricket.entities.Ball;
+import com.example.gamecricket.entities.TossResult;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface BallRepo extends CrudRepository<Ball,Integer> {
-
-    List<Ball> findByMatchNoAndInningsNo(int matchNo, int inningsNo);
+public interface TossRepo extends CrudRepository<TossResult,Integer> {
+    TossResult findByMatchID(int matchID);
 }

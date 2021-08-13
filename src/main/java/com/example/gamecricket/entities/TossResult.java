@@ -6,30 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.sql.Timestamp;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "`match`")
-public class Match extends Base{
+@Table(name = "`tossResult`")
+public class TossResult {
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int tossID;
     private int matchID;
-
-    @Column
-    private String venue;
-
-    @Column(name = "overs")
-    private int noOfOvers;
-
-    @Column
-    private int teamId1;
-
-    @Column
-    private int teamId2;
-
+    private int battingTeamID;
+    private int bowlingTeamID;
+    private String result;
 }

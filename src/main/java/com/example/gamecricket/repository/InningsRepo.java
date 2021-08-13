@@ -4,4 +4,6 @@ import com.example.gamecricket.entities.Innings;
 import org.springframework.data.repository.CrudRepository;
 
 public interface InningsRepo extends CrudRepository<Innings,Integer> {
+
+    Innings findByMatchNoAndInningsNo(int matchNo,int inningsNo);
 }

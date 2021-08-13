@@ -1,50 +1,18 @@
 package com.example.gamecricket.services;
 
-import com.example.gamecricket.entities.Match;
 import com.example.gamecricket.entities.Player;
-import com.example.gamecricket.repository.PlayerRepo;
-import com.example.gamecricket.response_dto.PlayerResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.example.gamecricket.request_dto.PlayerRequest;
+import com.example.gamecricket.response_dto.BaseResponse;
+import com.example.gamecricket.response_dto.PlayerSummary;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class PlayerService {
-    @Autowired
-    private PlayerRepo playerRepo;
-
-
-    public List<Player> getAllPlayers() {
-        List<Player>players=new ArrayList<>();
-        playerRepo.findAll().forEach(players::add);
-        return players;
-    }
-
-    public void createPlayer(Player player) {
-        playerRepo.save(player);
-    }
-
-    public void updatePlayer(int id, Player player) {
-        playerRepo.save(player);
-    }
-
-    public Player getPlayer(int id) {
-        Optional<Player> player = playerRepo.findById(id);
-        return player.orElse(player.get());
-    }
-
-    public void createListPlayers(List<Player>players)
-    {
-        for(Player player:players)
-        {
-            playerRepo.save(player);
-        }
-    }
-    public void deletePlayer(int id) {
-        playerRepo.deleteById(id);
-    }
-
+public interface PlayerService {
+    List<Player> getAllPlayers();
+    BaseResponse createPlayer(PlayerRequest playerRequest);
+    BaseResponse updatePlayer(int id, Player player);
+    Player getPlayer(int id);
+    BaseResponse createListPlayers(List<Player>players);
+    BaseResponse deletePlayer(int id);
+    PlayerSummary setPlayerSummaryForMatch(int matchNo, int inningsNo);
 }

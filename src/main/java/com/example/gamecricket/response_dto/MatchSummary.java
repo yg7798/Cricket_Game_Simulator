@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MatchResponse {
+public class MatchSummary {
     private String message;
+    private int matchNo;
     private Innings innings1;
     private Innings innings2;
 }

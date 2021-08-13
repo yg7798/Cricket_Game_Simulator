@@ -1,5 +1,7 @@
 package com.example.gamecricket.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,8 +11,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "`ball`")
-public class Ball {
+public class Ball extends Base{
 
+  @JsonIgnore
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int ballID;
@@ -18,12 +21,9 @@ public class Ball {
   private int strikerId;
   private int nonStrikerId;
   private int bowlerId;
-
-  //private Player striker,nonStriker;
   private int overNo;
-  @Enumerated(EnumType.STRING)
-  private RunOrWicket runOrWicket;
-
+  private int runsScored;
+  private boolean isWicketFall;
   private int matchNo;
   private  int inningsNo;
 }
