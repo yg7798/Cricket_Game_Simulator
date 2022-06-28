@@ -10,10 +10,12 @@ import com.example.gamecricket.response_dto.BowlerResponse;
 import com.example.gamecricket.response_dto.PlayerSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Component
+@Transactional
 public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private PlayerRepo playerRepo;

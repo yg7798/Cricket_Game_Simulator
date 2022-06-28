@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "`player`")
 public class Player extends Base{
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int playerID;
@@ -36,6 +35,8 @@ public class Player extends Base{
     private int scored4;
     @Column
     private int scored6;
+    @Column
+    private int inningsPlayed;
     @Column
     private double strikeRate;
     @Column

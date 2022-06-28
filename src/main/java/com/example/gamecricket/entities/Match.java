@@ -15,7 +15,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "`match`")
 public class Match extends Base{
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int matchID;

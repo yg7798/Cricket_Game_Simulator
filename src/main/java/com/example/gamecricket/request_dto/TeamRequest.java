@@ -18,7 +18,6 @@ public class TeamRequest {
     {
           Team  team=new Team();
           team.setTeamName(teamName);
-          team.setCreatedTime(System.currentTimeMillis());
           return team;
     }
 }

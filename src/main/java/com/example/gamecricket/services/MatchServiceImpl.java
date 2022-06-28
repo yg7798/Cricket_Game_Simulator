@@ -13,12 +13,14 @@ import com.example.gamecricket.response_dto.TossResponse;
 import com.example.gamecricket.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Component
+@Transactional
 public class MatchServiceImpl implements MatchService{
 
     @Autowired
